@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="">
+
+
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+  <title>
+    scala知识总结 | Hexo
+  </title>
+  <meta name="description" content="">
+  
+  <meta name="keywords" content="
+  大数据
+  ">
+  
+  <meta name="author" content="John Doe">
+
+  <meta http-equiv="Cache-Control" content="no-transform">
+  <meta http-equiv="Cache-Control" content="no-siteapp">
+
+  <link rel="icon" type="image/x-icon" href="">
+  <link rel="stylesheet" href="/css/main.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+  
+
+  
+
+  <script src="//cdnjs.cloudflare.com/ajax/libs/vue/1.0.25-csp/vue.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.11.2/moment.min.js"></script>
+</head>
+
+<body id="replica-app">
+
+<nav class="navbar-wrapper">
+  <div class="navbar">
+    <div class="container clearfix">
+      <a href="/" class="navbar-logo"><i class="fa fa-github"></i></a>
+
+      <div class="navbar-search float-left desktop-only">
+        <div class="navbar-search-form">
+          <label for="gsc-i-id1">This website</label>
+          <div id="google-search">
+            <gcse:search></gcse:search>
+          </div>
+        </div>
+      </div>
+
+      <ul class="navbar-nav float-left">
+        
+        <li><a href="/archives">Archives</a></li>
+        
+        
+        <li><a href="/categories">Categories</a></li>
+        
+        
+        <li><a href="/tags">Tags</a></li>
+        
+        
+        <li class="desktop-only"><a href="/atom.xml" target="_blank">RSS</a></li>
+        
+      </ul>
+
+      <ul class="navbar-nav user-nav float-right desktop-only">
+        <li class="user-nav-notification">
+          <a><span class="user-nav-unread"></span><i class="fa fa-bell"></i></a>
+        </li>
+        <li>
+          <a><i class="fa fa-plus"></i> <i class="fa fa-caret-down"></i></a>
+        </li>
+        <li class="user-nav-logo">
+          <a><img src="https://octodex.github.com/images/baracktocat.jpg"> <i class="fa fa-caret-down"></i></a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<div class="main-container">
+  <header class="header-wrapper desktop-only">
+  <div class="container header-site-detail">
+    <ul class="header-toolbar">
+      <li class="clearfix">
+        <a href="/archives" class="header-toolbar-left"><i class="fa fa-file-text"></i> Posts </a>
+        <a href="/archives" class="header-toolbar-right"> 4 </a>
+      </li>
+      <li>
+        <a href="/tags" class="header-toolbar-left"><i class="fa fa-tags"></i> Tags </a>
+        <a href="/tags" class="header-toolbar-right"> 2 </a>
+      </li>
+      <li>
+        <a href="/categories" class="header-toolbar-left"><i class="fa fa-folder-open"></i> Categories </a>
+        <a href="/categories" class="header-toolbar-right"> 0 </a>
+      </li>
+    </ul>
+    <h2 class="header-title">
+      <i class="fa fa-book text-muted"></i>
+      <a href="/">Hexo</a>
+      
+      
+    </h2>
+  </div>
+
+  <div class="container">
+    <div class="header-tab-wrapper clearfix">
+      <span class="header-tab header-tab-selected"><i class="fa fa-thumbs-o-up"></i> Like</span>
+      <span class="header-tab"><i class="fa fa-share-alt"></i> Share</span>
+      <span class="header-tab"><i class="fa fa-comments-o"></i> Discussion</span>
+      <span class="header-tab"><i class="fa fa-bookmark-o"></i> Bookmark </span>
+      <span class="header-tab"><i class="fa fa-smile-o"></i> Smile <i class="fa fa-caret-down"></i></span>
+    </div>
+  </div>
+</header>
+
+
+<div class="post-container container">
+  <h3>
+    <i class="fa fa-user-o"></i>
+    John Doe
+
+    <span class="post-date float-right" title="{{moment(1543576825000).format('MMM DD, YYYY, h:mm:ss A')}}">
+      <i class="fa fa-pencil-square-o"></i>
+      {{moment(1543576825000).fromNow()}}
+    </span>
+  </h3>
+
+  <article class="post-content">
+    <h1>scala知识总结</h1>
+    <h1 id="语法基础"><a href="#语法基础" class="headerlink" title="语法基础"></a>语法基础</h1><h2 id="与java的区别"><a href="#与java的区别" class="headerlink" title="与java的区别"></a>与java的区别</h2><p>1.避免以’$’或者’_’结尾<br>2.yield为Scala保留关键字<br>3.类名首字母大写，如果由多个单词拼接而成，每个单词首字母大写</p>
+<h2 id="换行符"><a href="#换行符" class="headerlink" title="换行符"></a>换行符</h2><p>‘;’是可选的，但如果一行里面有多条语句，那么换行符是需要的。例如 val s = “”;println(s)</p>
+<h2 id="数据类型"><a href="#数据类型" class="headerlink" title="数据类型"></a>数据类型</h2><p>和java类型相同，不同的是多了几种Any,AnyVal,AnyRef,Null,Nothing.其中java的Object对应于这里的AnyRef.值得注意的是：<strong>在Scala中所有的都是对象，即使是Int等值类型也是对象。</strong></p>
+<h2 id="val和var"><a href="#val和var" class="headerlink" title="val和var"></a>val和var</h2><p>val用来声明常量，var用来声明变量。使用val声明的常量，声明了以后就不能再修改了。这点和java的final相似。使用var声明的变量可以反复赋值。值得注意的是：在scala中，因为支持函数式编程，所以val可以接受多种类型，比如,数组，函数等等.例如：val pl = (40,”Foo”) </p>
+<h2 id="访问修饰符"><a href="#访问修饰符" class="headerlink" title="访问修饰符"></a>访问修饰符</h2><p>和java类似，缺少了java的default类型。默认情况下，Scala对象的访问级别都是public。而在java中，是default。</p>
+<p>1.private限定符，比java更严格，在嵌套类情况下，外层类甚至不能访问被嵌套类的私有成员。</p>
+<figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Outer</span></span>&#123;</span><br><span class="line">    <span class="class"><span class="keyword">class</span> <span class="title">Inner</span></span>&#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="function"><span class="keyword">def</span> <span class="title">f</span></span>()&#123;println(<span class="string">"f"</span>)&#125;</span><br><span class="line">    <span class="class"><span class="keyword">class</span> <span class="title">InnerMost</span></span>&#123;</span><br><span class="line">        f() <span class="comment">// 正确</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    (<span class="keyword">new</span> <span class="type">Inner</span>).f() <span class="comment">//错误</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>(new Inner).f( ) 访问不合法是因为 f 在 Inner 中被声明为 private，而访问不在类Inner之内。但在 InnerMost 里访问f就没有问题的，因为这个访问包含在 Inner 类之内。<br>2.protected限定符，只允许保护成员在定义了该成员的类的字类中被访问。区别于java的是，java允许同一个包中的其他类访问<br>3.public没有限制，在任何地方都可以被访问<br>4.作用域保护。Scala中，访问修饰符可以通过使用限定词强调。格式为：private[x] 或 protected[x]。这里的x指代某个所属的包，类或单例对象。如果写成private[x],读作“这个成员出了对[…]中的类或[…]中的包中的类以及它们的伴生对象可见外，对其他所有类都是private”。</p>
+<h2 id="循环"><a href="#循环" class="headerlink" title="循环"></a>循环</h2><p>其中while循环和do…while循环和java类似。重点记录for循环。<br>1.基础用法。其中，1 to 10表示循环从1到10包括1和10. 即[1,10] &lt;- 表示为变量x赋值。1 until 10表示从1到10不包括10.即[1,10).</p>
+<figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span>( <span class="keyword">var</span> x &lt;- <span class="number">1</span> to <span class="number">10</span> )&#123;</span><br><span class="line">   statement(s);</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">for</span>( <span class="keyword">var</span> x &lt;- <span class="number">1</span> until <span class="number">10</span> )&#123;</span><br><span class="line">   statement(s);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>2.使用分号’;’来设置多个区间。</p>
+<figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span>( a &lt;- <span class="number">1</span> to <span class="number">3</span>; b &lt;- <span class="number">1</span> to <span class="number">3</span>)&#123;</span><br><span class="line">         println( <span class="string">"Value of a: "</span> + a );</span><br><span class="line">         println( <span class="string">"Value of b: "</span> + b );</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>3.for循环集合，和java里面的增强for类似。</p>
+<figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">val</span> numList = <span class="type">List</span>(<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>,<span class="number">6</span>);</span><br><span class="line"> <span class="comment">// for 循环</span></span><br><span class="line"> <span class="keyword">for</span>( a &lt;- numList )&#123;</span><br><span class="line">    println( <span class="string">"Value of a: "</span> + a );</span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure>
+<p>4.for循环中过滤。Scala可以使用一个或者多个if语句来过滤一些元素。</p>
+<figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">val</span> numList = <span class="type">List</span>(<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>,<span class="number">6</span>)</span><br><span class="line"><span class="keyword">for</span>(a &lt;- numList</span><br><span class="line">    <span class="keyword">if</span> a != <span class="number">3</span>;<span class="keyword">if</span> a &lt; <span class="number">6</span>)&#123;</span><br><span class="line">    println(<span class="string">"..."</span>)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>5.for使用yield。Scala中可以讲for循环的返回值作为一个变量存储。特别的，x这里也可以当作一个表达式来处理。也就是说，可以对x变量进行操作，例如返回 x+1 也是可以的。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">var retVal = for&#123;var x &lt;- List</span><br><span class="line">                if cond1;if cond2 ...&#125;yield x</span><br></pre></td></tr></table></figure>
+<h2 id="functions（函数）-和-methods（方法）"><a href="#functions（函数）-和-methods（方法）" class="headerlink" title="functions（函数） 和 methods（方法）"></a>functions（函数） 和 methods（方法）</h2><p>函数式带参数的表达式。例如：（x:Int）=&gt; x+1 其中 =&gt; 是参数列表。右边是涉及参数的表达式。<br>函数也是可以命名的。例如：val addOne = (x:Int) =&gt; x + 1;println(addOne(1))<br>函数可以带有多个参数。例如：val add = (x:Int,y:Int) =&gt; x + y;println(add(1,2))<br>函数也可以不需要参数。例如：val getTheAnswer = () =&gt; 42;println(getTheAnswer())</p>
+<p>方法使用def定义。def后跟一个名称，参数列表，返回类型和正文。def add(x:Int,y:Int):Int = x + y。<br>方法使用多个参数。def addThenMultiply(x:Int,y:Int)(multiplier:Int):Int = (x+y)*multiplier;println(addThenMultiply(1,2)(3))<br>方法不带参数。def name:String = System.getProperty(“user.name”);println(“hello”+name+”!”)。更常见的方法使用：</p>
+<figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">getSquarteString</span></span>(input:<span class="type">Double</span>):<span class="type">String</span> = &#123;</span><br><span class="line">   <span class="keyword">val</span> square = input * input</span><br><span class="line">   square.toString<span class="comment">//这里是方法的返回值</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="字符串"><a href="#字符串" class="headerlink" title="字符串"></a>字符串</h2><p>在Scala中，字符串的类型实际上是Java String，它本身没有String类。String是一个不可变对象，所以该对象不可修改。这就意味着你如果修改字符串就会产生一个新的字符串对象。<br>声明字符串：var greeting = “hello world” ; var greeting:String = “hello world”;<br>可修改字符串：val buf = new StringBuilder;buf += ‘a’; buf += “bcdef”;println(“buf is:”+buf.toString);<br>类比java：常用的字符串方法有：length();concat();chartAt();indexOf();subString();trim();…</p>
+<h2 id="数组"><a href="#数组" class="headerlink" title="数组"></a>数组</h2><p>同java一样，数组下标从0开始。声明数组：</p>
+<figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> z:<span class="type">Array</span>[<span class="type">String</span>] = <span class="keyword">new</span> <span class="type">Array</span>[<span class="type">String</span>](<span class="number">3</span>)</span><br><span class="line">   <span class="keyword">var</span> z = <span class="keyword">new</span> <span class="type">Array</span>[<span class="type">String</span>](<span class="number">3</span>)</span><br><span class="line">   z(<span class="number">0</span>) = <span class="string">"first"</span>;z(<span class="number">1</span>) = <span class="string">"second"</span>;z(<span class="number">4</span>/<span class="number">2</span>) = <span class="string">"third"</span></span><br></pre></td></tr></table></figure>
+<p>也可以使用以下方式来定义一个数组：var list = Array(“first”,”second”,”third”)//这种方式更加常见，也比较简洁。数组遍历：</p>
+<figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span>(x &lt;- list)&#123;</span><br><span class="line">       println(s)</span><br><span class="line">   &#125;<span class="comment">//第一种方式</span></span><br><span class="line"><span class="keyword">var</span> list = <span class="type">Array</span>(<span class="number">12</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>)</span><br><span class="line"><span class="keyword">var</span> total = <span class="number">0.0</span></span><br><span class="line"><span class="keyword">for</span>(i &lt;- <span class="number">0</span> to (list.length - <span class="number">1</span>))&#123;</span><br><span class="line">   total += myList(i)<span class="comment">//注意访问数组下标的方式</span></span><br><span class="line">&#125;<span class="comment">//第二种方式</span></span><br></pre></td></tr></table></figure>
+<p>数据合并</p>
+<figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> list1 = <span class="type">Array</span>(<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>)</span><br><span class="line"><span class="keyword">var</span> list2 = <span class="type">Array</span>(<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>)</span><br><span class="line"><span class="keyword">var</span> list = concat(list1,list2)</span><br></pre></td></tr></table></figure>
+<p>创建区间数组</p>
+<figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> list1 = range(<span class="number">10</span>,<span class="number">20</span>,<span class="number">2</span>)</span><br><span class="line"><span class="keyword">var</span> list2 = range(<span class="number">10</span>,<span class="number">10</span>)<span class="comment">//默认步长为1</span></span><br></pre></td></tr></table></figure>
+<h2 id="集合"><a href="#集合" class="headerlink" title="集合"></a>集合</h2><p>Scala集合分为可变和不可变集合。可变集合可以在适当的地方被扩展或者更新。这意味着你可以修改，添加，移除一个集合的元素。而不可变集合，相比之下，永远不可改变。不过，你仍然可以模拟修改，添加，移除或更新操作。这些操作在每一种情况下都返回一个新的集合。同时是原来的集合不发生改变。集合有：</p>
+<blockquote>
+<p>List Set Map 元组 Option Iterator</p>
+</blockquote>
+<figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//普通列表</span></span><br><span class="line"><span class="keyword">val</span> site:<span class="type">List</span>[<span class="type">String</span>] = <span class="type">List</span>(<span class="string">"First"</span>,<span class="string">"Second"</span>,<span class="string">"Third"</span>)</span><br><span class="line"><span class="keyword">val</span> nums:<span class="type">List</span>[<span class="type">Int</span>] = <span class="type">List</span>(<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>)</span><br><span class="line"><span class="keyword">val</span> empty:<span class="type">List</span>[<span class="type">Nothing</span>] = <span class="type">List</span>()</span><br><span class="line"><span class="comment">//二维列表</span></span><br><span class="line"><span class="keyword">val</span> dim:<span class="type">List</span>[<span class="type">List</span>[<span class="type">Int</span>]] = </span><br><span class="line">    <span class="type">List</span>(</span><br><span class="line">        <span class="type">List</span>(<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>),</span><br><span class="line">        <span class="type">List</span>(<span class="number">3</span>,<span class="number">2</span>,<span class="number">4</span>),</span><br><span class="line">        <span class="type">List</span>(<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>)</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+<p>类比java，基本操作。head:返回列表第一个元素    tail:返回一个列表，包含除了第一个元素以外的其他元素      isEmpty:在列表为空时返回true。<br>其他的一些操作：</p>
+<figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//连接列表：可以使用 ::: 或者List.:::()方法 或者List.concat()方法来连接两个或多个列表 </span></span><br><span class="line">    <span class="keyword">val</span> list1 = <span class="type">List</span>(<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>)</span><br><span class="line">    <span class="keyword">val</span> list2 = <span class="type">List</span>(<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>)</span><br><span class="line">    <span class="keyword">var</span> list = list1 ::: list2;list = list1.:::(list2); list = <span class="type">List</span>.concat(list1,list2)</span><br><span class="line">    <span class="comment">//指定列表重复数量的元素:</span></span><br><span class="line">    <span class="type">List</span>.fill(repeateTimes:<span class="type">Int</span>)(ele:<span class="type">Any</span>)</span><br><span class="line">    <span class="keyword">val</span> site = <span class="type">List</span>.fill(<span class="number">3</span>)(<span class="string">"bo"</span>)<span class="comment">//重复“bo”三次</span></span><br><span class="line">    println(site)<span class="comment">//List(bo,bo,bo)</span></span><br><span class="line">    <span class="comment">//通过给定的函数来创建列表</span></span><br><span class="line">    <span class="type">List</span>.tabulate()</span><br><span class="line">    <span class="keyword">val</span> squares = <span class="type">List</span>.tabulate(<span class="number">6</span>)(n =&gt; n * n)<span class="comment">//方法的第一个参数为元素的数量，第二个参数为指定的函数，起始值为0</span></span><br><span class="line">    println(<span class="string">"一维："</span> + squares)<span class="comment">//一维：List(0,1,4,9,16,25)</span></span><br><span class="line">    <span class="comment">//也可以创建二维列表</span></span><br><span class="line">    <span class="keyword">val</span> mul = <span class="type">List</span>.tabulate(<span class="number">4</span>,<span class="number">5</span>)(_ * _)</span><br><span class="line">    println(<span class="string">"多维："</span>+mul)</span><br><span class="line">    <span class="comment">//输出值</span></span><br><span class="line">    <span class="type">List</span>(</span><br><span class="line">        <span class="type">List</span>(<span class="number">0</span>,<span class="number">0</span>,<span class="number">0</span>,<span class="number">0</span>,<span class="number">0</span>),</span><br><span class="line">        <span class="type">List</span>(<span class="number">0</span>, <span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>),</span><br><span class="line">        <span class="type">List</span>(<span class="number">0</span>, <span class="number">2</span>, <span class="number">4</span>, <span class="number">6</span>, <span class="number">8</span>),</span><br><span class="line">        <span class="type">List</span>(<span class="number">0</span>, <span class="number">3</span>, <span class="number">6</span>, <span class="number">9</span>, <span class="number">12</span>)</span><br><span class="line">    )</span><br></pre></td></tr></table></figure>
+<p>其他常用的方法</p>
+<ul>
+<li><font color="#8A2BE2"> addString(b:StringBuilder):StringBuilder 和addString(b:StringBuilder，sep:String):StringBuilder </font>  将列表中的所有元素添加到StringBuilder，可指定分隔符。注意：这里是将列表中的元素添加到StringBuilder，而不是将StringBuilder添加到列表中。</li>
+<li><font color="#8A2BE2">apply(n:Int):A:</font>通过索引获取集合中的元素。</li>
+<li><font color="#8A2BE2">distinct：List[A]</font> 去除列表中的重复元素，并返回新列表   </li>
+<li><font color="#8A2BE2">contains(ele:Any):Boolean:</font>检测列表中是否包含指定的元素  </li>
+<li><font color="#8A2BE2">drop(n:Int):List[A]:</font>丢弃前n个元素，并返回新列表。<font color="#8A2BE2">dropRight(n:Int):List[A]:</font>丢弃最后n个元素</li>
+<li><font color="#8A2BE2">take(n:Int):List[A]:</font>获取列表的后几个元素 。<font color="#8A2BE2">takeRight(n:Int):List[A]:提起列表的后n个元素</font></li>
+<li><font color="#8A2BE2">toArray:Array[A]:</font>列表转化为数组 toMap[T,U]:Map[T,U] toSeq:Seq[A] toSet[]:Set[B] toString():String </li>
+<li><font color="#8A2BE2">min/max</font></li>
+<li><font color="#8A2BE2">mkString:String ;mkString(sep:String):String</font></li>
+</ul>
+<h2 id="参考文章"><a href="#参考文章" class="headerlink" title="参考文章"></a>参考文章</h2><blockquote>
+<p><a href="http://www.runoob.com/scala/scala-tutorial.html" target="_blank" rel="noopener">http://www.runoob.com/scala/scala-tutorial.html</a>.<br><a href="http://docs.scala-lang.org/tour/tour-of-scala.html" target="_blank" rel="noopener">http://docs.scala-lang.org/tour/tour-of-scala.html</a></p>
+</blockquote>
+
+  </article>
+</div>
+
+
+    
+
+
+
+
+</div>
+
+<div class="footer-wrapper container">
+  <footer class="footer clearfix">
+    <div class="clearfix">
+    <a href="http://yoursite.com" class="footer-logo">
+      <i class="fa fa-github"></i>
+    </a>
+    <ul class="footer-social-link">
+      <li>© 2018 John Doe</li>
+      <li><a href="http://yoursite.com">Home</a></li>
+      
+    </ul>
+    <div class="footer-theme-info">
+      Theme <a href="//github.com/sabrinaluo/hexo-theme-replica">Replica</a>
+      by <a href="//github.com/sabrinaluo">Hiitea</a> ❤ Powered by Hexo
+    </div>
+    </div>
+    
+  </footer>
+</div>
+
+
+
+
+<script src="/js/main.js"></script>
+
+</body>
+</html>
