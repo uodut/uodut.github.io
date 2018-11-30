@@ -12,7 +12,7 @@
   <meta name="description" content="Talk is cheap,Show me the code.">
   
   <meta name="keywords" content="
-  大数据
+  scala
   ">
   
   <meta name="author" content="tudou">
@@ -87,11 +87,11 @@
       </li>
       <li>
         <a href="/tags" class="header-toolbar-left"><i class="fa fa-tags"></i> Tags </a>
-        <a href="/tags" class="header-toolbar-right"> 3 </a>
+        <a href="/tags" class="header-toolbar-right"> 4 </a>
       </li>
       <li>
         <a href="/categories" class="header-toolbar-left"><i class="fa fa-folder-open"></i> Categories </a>
-        <a href="/categories" class="header-toolbar-right"> 1 </a>
+        <a href="/categories" class="header-toolbar-right"> 2 </a>
       </li>
     </ul>
     <h2 class="header-title">
@@ -127,11 +127,11 @@
 
   <article class="post-content">
     <h1>scala知识总结</h1>
-    <h1 id="语法基础"><a href="#语法基础" class="headerlink" title="语法基础"></a>语法基础</h1><h2 id="与java的区别"><a href="#与java的区别" class="headerlink" title="与java的区别"></a>与java的区别</h2><p>1.避免以’$’或者’_’结尾<br>2.yield为Scala保留关键字<br>3.类名首字母大写，如果由多个单词拼接而成，每个单词首字母大写</p>
-<h2 id="换行符"><a href="#换行符" class="headerlink" title="换行符"></a>换行符</h2><p>‘;’是可选的，但如果一行里面有多条语句，那么换行符是需要的。例如 val s = “”;println(s)</p>
-<h2 id="数据类型"><a href="#数据类型" class="headerlink" title="数据类型"></a>数据类型</h2><p>和java类型相同，不同的是多了几种Any,AnyVal,AnyRef,Null,Nothing.其中java的Object对应于这里的AnyRef.值得注意的是：<strong>在Scala中所有的都是对象，即使是Int等值类型也是对象。</strong></p>
-<h2 id="val和var"><a href="#val和var" class="headerlink" title="val和var"></a>val和var</h2><p>val用来声明常量，var用来声明变量。使用val声明的常量，声明了以后就不能再修改了。这点和java的final相似。使用var声明的变量可以反复赋值。值得注意的是：在scala中，因为支持函数式编程，所以val可以接受多种类型，比如,数组，函数等等.例如：val pl = (40,”Foo”) </p>
-<h2 id="访问修饰符"><a href="#访问修饰符" class="headerlink" title="访问修饰符"></a>访问修饰符</h2><p>和java类似，缺少了java的default类型。默认情况下，Scala对象的访问级别都是public。而在java中，是default。</p>
+    <h1 id="语法基础"><a href="#语法基础" class="headerlink" title="语法基础"></a>语法基础</h1><h3 id="与java的区别"><a href="#与java的区别" class="headerlink" title="与java的区别"></a>与java的区别</h3><p>1.避免以’$’或者’_’结尾<br>2.yield为Scala保留关键字<br>3.类名首字母大写，如果由多个单词拼接而成，每个单词首字母大写</p>
+<h3 id="换行符"><a href="#换行符" class="headerlink" title="换行符"></a>换行符</h3><p>‘;’是可选的，但如果一行里面有多条语句，那么换行符是需要的。例如 val s = “”;println(s)</p>
+<h3 id="数据类型"><a href="#数据类型" class="headerlink" title="数据类型"></a>数据类型</h3><p>和java类型相同，不同的是多了几种Any,AnyVal,AnyRef,Null,Nothing.其中java的Object对应于这里的AnyRef.值得注意的是：<strong>在Scala中所有的都是对象，即使是Int等值类型也是对象。</strong></p>
+<h3 id="val和var"><a href="#val和var" class="headerlink" title="val和var"></a>val和var</h3><p>val用来声明常量，var用来声明变量。使用val声明的常量，声明了以后就不能再修改了。这点和java的final相似。使用var声明的变量可以反复赋值。值得注意的是：在scala中，因为支持函数式编程，所以val可以接受多种类型，比如,数组，函数等等.例如：val pl = (40,”Foo”) </p>
+<h3 id="访问修饰符"><a href="#访问修饰符" class="headerlink" title="访问修饰符"></a>访问修饰符</h3><p>和java类似，缺少了java的default类型。默认情况下，Scala对象的访问级别都是public。而在java中，是default。</p>
 <p>1.private限定符，比java更严格，在嵌套类情况下，外层类甚至不能访问被嵌套类的私有成员。</p>
 <figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Outer</span></span>&#123;</span><br><span class="line">    <span class="class"><span class="keyword">class</span> <span class="title">Inner</span></span>&#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="function"><span class="keyword">def</span> <span class="title">f</span></span>()&#123;println(<span class="string">"f"</span>)&#125;</span><br><span class="line">    <span class="class"><span class="keyword">class</span> <span class="title">InnerMost</span></span>&#123;</span><br><span class="line">        f() <span class="comment">// 正确</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    (<span class="keyword">new</span> <span class="type">Inner</span>).f() <span class="comment">//错误</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>(new Inner).f( ) 访问不合法是因为 f 在 Inner 中被声明为 private，而访问不在类Inner之内。但在 InnerMost 里访问f就没有问题的，因为这个访问包含在 Inner 类之内。<br>2.protected限定符，只允许保护成员在定义了该成员的类的字类中被访问。区别于java的是，java允许同一个包中的其他类访问<br>3.public没有限制，在任何地方都可以被访问<br>4.作用域保护。Scala中，访问修饰符可以通过使用限定词强调。格式为：private[x] 或 protected[x]。这里的x指代某个所属的包，类或单例对象。如果写成private[x],读作“这个成员出了对[…]中的类或[…]中的包中的类以及它们的伴生对象可见外，对其他所有类都是private”。</p>
@@ -166,15 +166,25 @@
 <figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//连接列表：可以使用 ::: 或者List.:::()方法 或者List.concat()方法来连接两个或多个列表 </span></span><br><span class="line">    <span class="keyword">val</span> list1 = <span class="type">List</span>(<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>)</span><br><span class="line">    <span class="keyword">val</span> list2 = <span class="type">List</span>(<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>)</span><br><span class="line">    <span class="keyword">var</span> list = list1 ::: list2;list = list1.:::(list2); list = <span class="type">List</span>.concat(list1,list2)</span><br><span class="line">    <span class="comment">//指定列表重复数量的元素:</span></span><br><span class="line">    <span class="type">List</span>.fill(repeateTimes:<span class="type">Int</span>)(ele:<span class="type">Any</span>)</span><br><span class="line">    <span class="keyword">val</span> site = <span class="type">List</span>.fill(<span class="number">3</span>)(<span class="string">"bo"</span>)<span class="comment">//重复“bo”三次</span></span><br><span class="line">    println(site)<span class="comment">//List(bo,bo,bo)</span></span><br><span class="line">    <span class="comment">//通过给定的函数来创建列表</span></span><br><span class="line">    <span class="type">List</span>.tabulate()</span><br><span class="line">    <span class="keyword">val</span> squares = <span class="type">List</span>.tabulate(<span class="number">6</span>)(n =&gt; n * n)<span class="comment">//方法的第一个参数为元素的数量，第二个参数为指定的函数，起始值为0</span></span><br><span class="line">    println(<span class="string">"一维："</span> + squares)<span class="comment">//一维：List(0,1,4,9,16,25)</span></span><br><span class="line">    <span class="comment">//也可以创建二维列表</span></span><br><span class="line">    <span class="keyword">val</span> mul = <span class="type">List</span>.tabulate(<span class="number">4</span>,<span class="number">5</span>)(_ * _)</span><br><span class="line">    println(<span class="string">"多维："</span>+mul)</span><br><span class="line">    <span class="comment">//输出值</span></span><br><span class="line">    <span class="type">List</span>(</span><br><span class="line">        <span class="type">List</span>(<span class="number">0</span>,<span class="number">0</span>,<span class="number">0</span>,<span class="number">0</span>,<span class="number">0</span>),</span><br><span class="line">        <span class="type">List</span>(<span class="number">0</span>, <span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>),</span><br><span class="line">        <span class="type">List</span>(<span class="number">0</span>, <span class="number">2</span>, <span class="number">4</span>, <span class="number">6</span>, <span class="number">8</span>),</span><br><span class="line">        <span class="type">List</span>(<span class="number">0</span>, <span class="number">3</span>, <span class="number">6</span>, <span class="number">9</span>, <span class="number">12</span>)</span><br><span class="line">    )</span><br></pre></td></tr></table></figure>
 <p>其他常用的方法</p>
 <ul>
-<li><font color="#8A2BE2"> addString(b:StringBuilder):StringBuilder 和addString(b:StringBuilder，sep:String):StringBuilder </font>  将列表中的所有元素添加到StringBuilder，可指定分隔符。注意：这里是将列表中的元素添加到StringBuilder，而不是将StringBuilder添加到列表中。</li>
-<li><font color="#8A2BE2">apply(n:Int):A:</font>通过索引获取集合中的元素。</li>
-<li><font color="#8A2BE2">distinct：List[A]</font> 去除列表中的重复元素，并返回新列表   </li>
-<li><font color="#8A2BE2">contains(ele:Any):Boolean:</font>检测列表中是否包含指定的元素  </li>
-<li><font color="#8A2BE2">drop(n:Int):List[A]:</font>丢弃前n个元素，并返回新列表。<font color="#8A2BE2">dropRight(n:Int):List[A]:</font>丢弃最后n个元素</li>
-<li><font color="#8A2BE2">take(n:Int):List[A]:</font>获取列表的后几个元素 。<font color="#8A2BE2">takeRight(n:Int):List[A]:提起列表的后n个元素</font></li>
-<li><font color="#8A2BE2">toArray:Array[A]:</font>列表转化为数组 toMap[T,U]:Map[T,U] toSeq:Seq[A] toSet[]:Set[B] toString():String </li>
-<li><font color="#8A2BE2">min/max</font></li>
-<li><font color="#8A2BE2">mkString:String ;mkString(sep:String):String</font></li>
+<li><p>addString(b:StringBuilder):StringBuilder 和addString(b:StringBuilder，sep:String):StringBuilder    </p>
+<p>将列表中的所有元素添加到StringBuilder，可指定分隔符。注意：这里是将列表中的元素添加到StringBuilder，而不是将StringBuilder添加到列表中。</p>
+</li>
+<li><p>apply(n:Int):A:通过索引获取集合中的元素。</p>
+</li>
+<li><p>distinct：List[A] 去除列表中的重复元素，并返回新列表   </p>
+</li>
+<li><p>contains(ele:Any):Boolean:检测列表中是否包含指定的元素  </p>
+</li>
+<li><p>drop(n:Int):List[A]:丢弃前n个元素，并返回新列表。dropRight(n:Int):List[A]:丢弃最后n个元素</p>
+</li>
+<li><p>take(n:Int):List[A]:获取列表的后几个元素 。takeRight(n:Int):List[A]:提起列表的后n个元素</p>
+</li>
+<li><p>toArray:Array[A]:列表转化为数组 toMap[T,U]:Map[T,U] toSeq:Seq[A] toSet[]:Set[B] toString():String </p>
+</li>
+<li><p>min/max</p>
+</li>
+<li><p>mkString:String ;mkString(sep:String):String</p>
+</li>
 </ul>
 <h2 id="参考文章"><a href="#参考文章" class="headerlink" title="参考文章"></a>参考文章</h2><blockquote>
 <p><a href="http://www.runoob.com/scala/scala-tutorial.html" target="_blank" rel="noopener">http://www.runoob.com/scala/scala-tutorial.html</a>.<br><a href="http://docs.scala-lang.org/tour/tour-of-scala.html" target="_blank" rel="noopener">http://docs.scala-lang.org/tour/tour-of-scala.html</a></p>
