@@ -136,8 +136,9 @@
 <li>不可中断状态的进程<br>正处于内核态关键流程中的进程，并且这些进程是不可打断的，最常见的是等待硬件设备的I/O响应，也就是我们在ps命令中看到的D状态（Uninterruptible Sleep,也称为Disk Sleep）的进程。<br>==比如：== 当一个进程向磁盘读写数据时，为了保证数据的一致性，在得到磁盘回复前，它是不能被其他进程或者中断打断的，这个时候的进程就处于不可中断状态。如果此时的进程被打断了，就容易出现磁盘数据与进程数据不一致的问题。==所以：不可中断状态实际上是系统对进程和硬件设备的一种保护机制。==<br>因此，你可以简单理解为，平均负载其实就是平均活跃进程数。最理想的，就是每个cpu上都刚好运行着一个进程，这样每个cpu都能得到充分利用。比如平均负载为2时，意味着什么呢？</li>
 <li>在只有2个cpu的系统上，意味着所有的cpu都刚好被完全占用</li>
 <li>在4个cpu的系统上，意味着cpu有50%的空闲</li>
-<li>在只有1个cpu的系统中，则意味着有一半的进程竞争不到cpu<h3 id="平均负载为多少时合理"><a href="#平均负载为多少时合理" class="headerlink" title="平均负载为多少时合理"></a>平均负载为多少时合理</h3>平均负载最理想的情况是等于cpu个数。所以在评判平均负载时，首先你要知道系统有几个cpu，可以通过top命令或者从文件 /proc/cpuinfo 中读取。   </li>
+<li>在只有1个cpu的系统中，则意味着有一半的进程竞争不到cpu<h3 id="平均负载为多少时合理"><a href="#平均负载为多少时合理" class="headerlink" title="平均负载为多少时合理"></a>平均负载为多少时合理</h3></li>
 </ul>
+<p>平均负载最理想的情况是等于cpu个数。所以在评判平均负载时，首先你要知道系统有几个cpu，可以通过top命令或者从文件 /proc/cpuinfo 中读取。   </p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"># 执行top命令后，摁数字1键</span><br><span class="line">top </span><br><span class="line">1</span><br></pre></td></tr></table></figure>
 <p><em>图片</em><br>从图片中可以看到是8个cpu。<br>也可以从文件 /proc/cpuinfo 中读取。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">grep &apos;model name&apos; /proc/cpuinfo|wc -l</span><br><span class="line">8</span><br></pre></td></tr></table></figure></p>
 <p>有了cpu个数，我们就可以判断出，当平均负载比cpu个数还大的时候，系统已经出现了过载。对于上面的三个数字来说，平均负载到底该参考哪一个呢？<br>实际上，都要看。三个不同时间间隔的平均值，其实给我们都提供了分析系统负载趋势的数据来源，让我们更全面、更立体地理解目前的负载情况。打个比方：就像初秋的北京的天气，如果只看中午的温度，你可能以为还在7月份的大夏天呢。但如果结合了早上、中午、晚上三个时间点的温度来看的话，基本可以定位了解这一天的天气状况。<br>同样的，前面说到的cpu的三个负载时间段也是这个道理。</p>
@@ -154,8 +155,9 @@
 <ul>
 <li>cpu密集型进程，使用大量cpu会导致平均负载升高，此时这两者是一致的。</li>
 <li>i/o密集型进程，等待i/o也会导致平均负载升高，但cpu使用率不一定高。</li>
-<li>大量等待cpu的进程调度也会导致平均负载升高，此时的cpu使用率也会升高。<h3 id="平均负载案例分析"><a href="#平均负载案例分析" class="headerlink" title="平均负载案例分析"></a>平均负载案例分析</h3>下面以三个示例来看这三种情况，并用iostat、mpstat、pidstat等工具，找出平均负载升高的根源。</li>
+<li>大量等待cpu的进程调度也会导致平均负载升高，此时的cpu使用率也会升高。<h3 id="平均负载案例分析"><a href="#平均负载案例分析" class="headerlink" title="平均负载案例分析"></a>平均负载案例分析</h3></li>
 </ul>
+<p>下面以三个示例来看这三种情况，并用iostat、mpstat、pidstat等工具，找出平均负载升高的根源。</p>
 
   </article>
 </div>
