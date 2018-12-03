@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="">
+
+
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+  <title>
+    链表 | 技术杂谈
+  </title>
+  <meta name="description" content="Talk is cheap,Show me the code.">
+  
+  <meta name="keywords" content="
+  数据结构与算法
+  ">
+  
+  <meta name="author" content="tudou">
+
+  <meta http-equiv="Cache-Control" content="no-transform">
+  <meta http-equiv="Cache-Control" content="no-siteapp">
+
+  <link rel="icon" type="image/x-icon" href="">
+  <link rel="stylesheet" href="/css/main.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+  
+
+  
+
+  <script src="//cdnjs.cloudflare.com/ajax/libs/vue/1.0.25-csp/vue.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.11.2/moment.min.js"></script>
+</head>
+
+<body id="replica-app">
+
+<nav class="navbar-wrapper">
+  <div class="navbar">
+    <div class="container clearfix">
+      <a href="/" class="navbar-logo"><i class="fa fa-github"></i></a>
+
+      <div class="navbar-search float-left desktop-only">
+        <div class="navbar-search-form">
+          <label for="gsc-i-id1">This website</label>
+          <div id="google-search">
+            <gcse:search></gcse:search>
+          </div>
+        </div>
+      </div>
+
+      <ul class="navbar-nav float-left">
+        
+        <li><a href="/archives">Archives</a></li>
+        
+        
+        <li><a href="/categories">Categories</a></li>
+        
+        
+        <li><a href="/tags">Tags</a></li>
+        
+        
+        <li class="desktop-only"><a href="/atom.xml" target="_blank">RSS</a></li>
+        
+      </ul>
+
+      <ul class="navbar-nav user-nav float-right desktop-only">
+        <li class="user-nav-notification">
+          <a><span class="user-nav-unread"></span><i class="fa fa-bell"></i></a>
+        </li>
+        <li>
+          <a><i class="fa fa-plus"></i> <i class="fa fa-caret-down"></i></a>
+        </li>
+        <li class="user-nav-logo">
+          <a><img src="https://octodex.github.com/images/baracktocat.jpg"> <i class="fa fa-caret-down"></i></a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<div class="main-container">
+  <header class="header-wrapper desktop-only">
+  <div class="container header-site-detail">
+    <ul class="header-toolbar">
+      <li class="clearfix">
+        <a href="/archives" class="header-toolbar-left"><i class="fa fa-file-text"></i> Posts </a>
+        <a href="/archives" class="header-toolbar-right"> 5 </a>
+      </li>
+      <li>
+        <a href="/tags" class="header-toolbar-left"><i class="fa fa-tags"></i> Tags </a>
+        <a href="/tags" class="header-toolbar-right"> 6 </a>
+      </li>
+      <li>
+        <a href="/categories" class="header-toolbar-left"><i class="fa fa-folder-open"></i> Categories </a>
+        <a href="/categories" class="header-toolbar-right"> 2 </a>
+      </li>
+    </ul>
+    <h2 class="header-title">
+      <i class="fa fa-book text-muted"></i>
+      <a href="/">技术杂谈</a>
+      
+      
+    </h2>
+  </div>
+
+  <div class="container">
+    <div class="header-tab-wrapper clearfix">
+      <span class="header-tab header-tab-selected"><i class="fa fa-thumbs-o-up"></i> Like</span>
+      <span class="header-tab"><i class="fa fa-share-alt"></i> Share</span>
+      <span class="header-tab"><i class="fa fa-comments-o"></i> Discussion</span>
+      <span class="header-tab"><i class="fa fa-bookmark-o"></i> Bookmark </span>
+      <span class="header-tab"><i class="fa fa-smile-o"></i> Smile <i class="fa fa-caret-down"></i></span>
+    </div>
+  </div>
+</header>
+
+
+<div class="post-container container">
+  <h3>
+    <i class="fa fa-user-o"></i>
+    tudou
+
+    <span class="post-date float-right" title="{{moment(1543820952000).format('MMM DD, YYYY, h:mm:ss A')}}">
+      <i class="fa fa-pencil-square-o"></i>
+      {{moment(1543820952000).fromNow()}}
+    </span>
+  </h3>
+
+  <article class="post-content">
+    <h1>链表</h1>
+    <h3 id="难点"><a href="#难点" class="headerlink" title="难点"></a>难点</h3><p>手写常见的链表操作代码(链表反转、是否有环、链表合并等)。难点在于</p>
+<ol>
+<li>指针的正确使用（指来指去容易出错）</li>
+<li>边界条件等坑</li>
+</ol>
+<h3 id="引子"><a href="#引子" class="headerlink" title="引子"></a>引子</h3><p>缓存是一种提高数据读取性能的技术。在硬件设计、软件开发中都有着非常广泛的应用，比如常见的CPU缓存、数据库缓存、浏览器缓存等。</p>
+<p>缓存的大小有限，当缓存被用满时，哪些数据应该被清理出去，哪些数据应该被保留？这需要缓存策略来决定。常见的策略模式有三种：</p>
+<ul>
+<li>先进先出策略FIFO(First In,First Out)</li>
+<li>最少使用策略LFU(Least Frequency Used)</li>
+<li>最近最少使用策略(Least Recently Used)：如果数据最近被访问过，那么将来也有可能被访问。(最近被访问的优先级更高，更不容易被淘汰)</li>
+</ul>
+<blockquote>
+<p>Question1:如何用链表来实现LRU(Least Recently Used)缓存淘汰策略呢？</p>
+</blockquote>
+<h3 id="基础知识"><a href="#基础知识" class="headerlink" title="基础知识"></a>基础知识</h3><ol>
+<li>从底层的存储结构来看</li>
+</ol>
+<p>数组需要<strong>一块连续的内存空间</strong>来存储。如果申请一个100MB大小的数组，如果内存中没有连续的、足够大的存储空间时，即便内存可用空间大于100MB,仍然会申请失败。</p>
+<p>链表恰恰相反，它不需要一块连续的内存空间，它通过“指针”将<strong>一组零散的内存块</strong>串联起来使用。如果申请100MB的链表可用空间，不会有问题。</p>
+<p><img src="https://ws3.sinaimg.cn/large/006tNbRwly1fxtluor0wtj30vq0jfgne.jpg" alt=""></p>
+<ol start="2">
+<li>链表分类</li>
+</ol>
+<p>常见的链表结构有三种：单链表、双向链表、循环链表</p>
+<p>单链表的每个节点由<strong>当前节点值</strong>以及指向<strong>下个节点的指针</strong>组成。其中有两个节点比较特殊：第一个节点和最后一个节点。我们习惯把第一个节点叫做<strong>头节点</strong>，把最后一个节点叫做尾节点。头节点用来记录链表的基地址，有了它，我们可以依次遍历得到整个链表。尾节点不是指向下一个指针，而是指向一个空地址NULL。如下图所示：</p>
+<p><img src="https://ws1.sinaimg.cn/large/006tNbRwly1fxtm2brserj30vq0b3dgs.jpg" alt=""></p>
+<p>双向链表需要两个空间来额外存储后继节点和前驱节点的地址。和单链表相比，双向链表可以通过O(1)的时间复杂度找到前驱节点。LinkedHashMap用的就是双向链表的结构。具体如下图所示：</p>
+<p><img src="https://ws1.sinaimg.cn/large/006tNbRwly1fxtrka8pfgj30vq0b3jsf.jpg" alt=""></p>
+<blockquote>
+<p>和单链表相比，这里体现了用空间换时间的思想。当内存空间充足的时候，如果更加追求代码的执行速度，我们就可以选择空间复杂度相对较高、但时间复杂度相对较低的算法或者数据结构。相反，如果内存比较紧缺，可以考虑反过来时间换空间的设计思路。</p>
+</blockquote>
+<p>循环链表就是尾指针指向头指针形成一个环，具体如下图所示：</p>
+<p><img src="https://ws4.sinaimg.cn/large/006tNbRwly1fxtrmcvqqej30vq0dw0ub.jpg" alt=""></p>
+<ol start="3">
+<li>性能分析</li>
+</ol>
+<p><img src="https://ws1.sinaimg.cn/large/006tNbRwly1fxtrjdtqlyj30vq0chmyi.jpg" alt=""></p>
+<h3 id="引子答案"><a href="#引子答案" class="headerlink" title="引子答案"></a>引子答案</h3><p>1) 基于链表实现LRU的缓存淘汰策略算法</p>
+<p>思路：维护一个<strong>有序的单链表</strong>，越靠近链表尾部的节点是越早之前访问的。当有一个新的数据被访问时，我们从链表头开始顺序遍历链表。</p>
+<ol>
+<li>如果此数据之前已经被缓存在链表中了，我们遍历得到这个数据对应的节点，并将其从原来的位置删除，然后再插入到链表的头部</li>
+<li>如果此数据没有缓存在链表中，又可以分为两种情况：<ul>
+<li>如果此时链表未满，则将此节点直接插入到链表的头部</li>
+<li>如果此时链表已满，则链表尾节点删除，将新的数据节点插入链表的头部</li>
+</ul>
+</li>
+</ol>
+<p>那么缓存访问的时间复杂度是多少呢？不管缓存有没有满，我们都需要遍历一遍链表查看是否存在，所以时间复杂度为O(n)</p>
+<p>2) 基于数组实现LRU的缓存淘汰策略算法</p>
+<p>思路：声明一个固定大小的数组，数组下标越小是越早之前被访问的。当有一个新的数据被访问时，从数组最大下标逆序开始遍历数组。</p>
+<ol>
+<li>如果此数据已经被缓存在数组中了，从数组最大下标到该元素下标依次迁移一位</li>
+<li>如果此数据不存在在数组中，也可以分为两种情况：<ul>
+<li>如果数组满了，删除数组下标0的元素，并依次前移一位，然后末尾插入新元素</li>
+<li>如果数组不满，在当前下标的+1下表插入新元素</li>
+</ul>
+</li>
+</ol>
+<p>那么此时缓存的时间复杂度是多少呢？查找元素时间复杂度为O(n),移动元素的时间复杂度为O(n),综合时间复杂度为O(n)</p>
+<p>3) 基于散列表实现LRU的缓存淘汰策略算法 <font color="red"><strong>O(1)时间复杂度</strong></font></p>
+<h3 id="写链表代码"><a href="#写链表代码" class="headerlink" title="写链表代码"></a>写链表代码</h3><p>碰到一个新问题时，完全写对链表代码不是一件容易的事情。有几个比较观点的点需要记录一下</p>
+<h4 id="一、指针或者引用的含义"><a href="#一、指针或者引用的含义" class="headerlink" title="一、指针或者引用的含义"></a>一、指针或者引用的含义</h4><p>指针和引用是一样的意思，都是指<strong>存储所指对象的内存地址。</strong>在不同的语言里叫法不一样，在C,C++中叫指针，在java、python中叫引用。</p>
+<blockquote>
+<p>将某个变量赋值给指针，实际上是将这个变量的地址赋值给指针。或者反过来说，指针中存储了这个变量的内存地址，指向了这个变量，通过指针就能找到这个变量。</p>
+</blockquote>
+<p>下面这几种形式是写代码的时候经常遇到的，需要理清楚它的含义：</p>
+<ol>
+<li>p.next=q;</li>
+</ol>
+<p>这行代码是说：p节点的next变量存储了q节点的地址。也可以说：p的next指针指向了q节点。</p>
+<ol start="2">
+<li>p=q.next;</li>
+</ol>
+<p>这行代码是说：p节点存储了q节点的next变量地址。也就是说：p节点对象的当前地址值为q节点的next指针的地址值。也可以说：q的next指针指向了q</p>
+<ol start="3">
+<li>p.next=p.next.next;</li>
+</ol>
+<p>这行代码是说：p节点的next指针存储了p节点的下下一个节点的内存地址。也可以说：p的next指针指向了p节点的下下一个节点的内存地址。</p>
+<h4 id="二、指针丢失问题"><a href="#二、指针丢失问题" class="headerlink" title="二、指针丢失问题"></a>二、指针丢失问题</h4><p>有些时候，不合理的赋值顺序会导致指针引用丢失。也是经常会出现的问题bug。指针丢失会导致链表断裂等问题。</p>
+<p><img src="https://ws2.sinaimg.cn/large/006tNbRwly1fxtpatrsyij30vq0e9gmi.jpg" alt=""></p>
+<p>如上图所示：我们希望在节点a和节点b之间插入节点x,假设指针p指向了节点a。如果代码是下面这个样子的，就会导致指针丢失。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">p.next=x;</span><br><span class="line">x.next=p.next;</span><br></pre></td></tr></table></figure>
+<p>分析一下上面的代码：第一行把p的next指针指向了x。第二行把x的next指针指向了p的next。但<strong>此时p的next已经是x了，</strong>所以第二行的含义就变成了 x的next指针指向了x，那么b节点就没有指针可以到达了，此时链就从x和b节点中间断开了。。</p>
+<p>把代码的先后顺序更换一下：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">x.next=p.next;</span><br><span class="line">p.next=x;</span><br></pre></td></tr></table></figure>
+<p>分析一下上面的代码：第一行把x的next指针指向了p的next指针，也就是x指向了b。第二行把p的next指针指向了x。在执行第二步以前，x和p的next指针是同时指向b的。执行完第二步，变成了p的next执行了x，x的next指向了b,这样就完成了在 ab之间插入节点x的操作。</p>
+<p><strong>注意：一般我们在改变一个指针指向以前，需要考虑这个指针原指向的内存地址是否会在下面使用。如果需要使用，需要把这个地址的值先保存起来，要么保存到一个单独的中间变量中，要么保存在需要的含义下（抽象，例如上面的</strong>x.next=p.next; **</p>
+<h4 id="三、利用哨兵简化实现难度"><a href="#三、利用哨兵简化实现难度" class="headerlink" title="三、利用哨兵简化实现难度"></a>三、利用哨兵简化实现难度</h4><h4 id="四、留意边界条件处理"><a href="#四、留意边界条件处理" class="headerlink" title="四、留意边界条件处理"></a>四、留意边界条件处理</h4><h4 id="五、纸上画图思考"><a href="#五、纸上画图思考" class="headerlink" title="五、纸上画图思考"></a>五、纸上画图思考</h4><h3 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h3><p>一些比较简单的题目，用来练手</p>
+<ol>
+<li>单链表反转</li>
+<li>链表中环的检测</li>
+<li>两个有序的链表合并</li>
+<li>删除链表中倒数第n个节点</li>
+<li>求链表的中间节点</li>
+<li>通过链表存储的字符串，判断是否是回问字符串</li>
+</ol>
+
+  </article>
+</div>
+
+
+    
+
+
+
+
+</div>
+
+<div class="footer-wrapper container">
+  <footer class="footer clearfix">
+    <div class="clearfix">
+    <a href="http://wanggaoliang.club" class="footer-logo">
+      <i class="fa fa-github"></i>
+    </a>
+    <ul class="footer-social-link">
+      <li>© 2018 tudou</li>
+      <li><a href="http://wanggaoliang.club">Home</a></li>
+      
+    </ul>
+    <div class="footer-theme-info">
+      Theme <a href="//github.com/sabrinaluo/hexo-theme-replica">Replica</a>
+      by <a href="//github.com/sabrinaluo">Hiitea</a> ❤ Powered by Hexo
+    </div>
+    </div>
+    
+  </footer>
+</div>
+
+
+
+
+<script src="/js/main.js"></script>
+
+</body>
+</html>
