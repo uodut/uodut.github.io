@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="">
+
+
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+  <title>
+    Linux性能优化 | 技术杂谈
+  </title>
+  <meta name="description" content="Talk is cheap,Show me the code.">
+  
+  <meta name="keywords" content="
+  平均负载
+  ">
+  
+  <meta name="author" content="tudou">
+
+  <meta http-equiv="Cache-Control" content="no-transform">
+  <meta http-equiv="Cache-Control" content="no-siteapp">
+
+  <link rel="icon" type="image/x-icon" href="">
+  <link rel="stylesheet" href="/css/main.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+  
+
+  
+
+  <script src="//cdnjs.cloudflare.com/ajax/libs/vue/1.0.25-csp/vue.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.11.2/moment.min.js"></script>
+</head>
+
+<body id="replica-app">
+
+<nav class="navbar-wrapper">
+  <div class="navbar">
+    <div class="container clearfix">
+      <a href="/" class="navbar-logo"><i class="fa fa-github"></i></a>
+
+      <div class="navbar-search float-left desktop-only">
+        <div class="navbar-search-form">
+          <label for="gsc-i-id1">This website</label>
+          <div id="google-search">
+            <gcse:search></gcse:search>
+          </div>
+        </div>
+      </div>
+
+      <ul class="navbar-nav float-left">
+        
+        <li><a href="/archives">Archives</a></li>
+        
+        
+        <li><a href="/categories">Categories</a></li>
+        
+        
+        <li><a href="/tags">Tags</a></li>
+        
+        
+        <li class="desktop-only"><a href="/atom.xml" target="_blank">RSS</a></li>
+        
+      </ul>
+
+      <ul class="navbar-nav user-nav float-right desktop-only">
+        <li class="user-nav-notification">
+          <a><span class="user-nav-unread"></span><i class="fa fa-bell"></i></a>
+        </li>
+        <li>
+          <a><i class="fa fa-plus"></i> <i class="fa fa-caret-down"></i></a>
+        </li>
+        <li class="user-nav-logo">
+          <a><img src="https://octodex.github.com/images/baracktocat.jpg"> <i class="fa fa-caret-down"></i></a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<div class="main-container">
+  <header class="header-wrapper desktop-only">
+  <div class="container header-site-detail">
+    <ul class="header-toolbar">
+      <li class="clearfix">
+        <a href="/archives" class="header-toolbar-left"><i class="fa fa-file-text"></i> Posts </a>
+        <a href="/archives" class="header-toolbar-right"> 5 </a>
+      </li>
+      <li>
+        <a href="/tags" class="header-toolbar-left"><i class="fa fa-tags"></i> Tags </a>
+        <a href="/tags" class="header-toolbar-right"> 5 </a>
+      </li>
+      <li>
+        <a href="/categories" class="header-toolbar-left"><i class="fa fa-folder-open"></i> Categories </a>
+        <a href="/categories" class="header-toolbar-right"> 2 </a>
+      </li>
+    </ul>
+    <h2 class="header-title">
+      <i class="fa fa-book text-muted"></i>
+      <a href="/">技术杂谈</a>
+      
+      
+    </h2>
+  </div>
+
+  <div class="container">
+    <div class="header-tab-wrapper clearfix">
+      <span class="header-tab header-tab-selected"><i class="fa fa-thumbs-o-up"></i> Like</span>
+      <span class="header-tab"><i class="fa fa-share-alt"></i> Share</span>
+      <span class="header-tab"><i class="fa fa-comments-o"></i> Discussion</span>
+      <span class="header-tab"><i class="fa fa-bookmark-o"></i> Bookmark </span>
+      <span class="header-tab"><i class="fa fa-smile-o"></i> Smile <i class="fa fa-caret-down"></i></span>
+    </div>
+  </div>
+</header>
+
+
+<div class="post-container container">
+  <h3>
+    <i class="fa fa-user-o"></i>
+    tudou
+
+    <span class="post-date float-right" title="{{moment(1543575972000).format('MMM DD, YYYY, h:mm:ss A')}}">
+      <i class="fa fa-pencil-square-o"></i>
+      {{moment(1543575972000).fromNow()}}
+    </span>
+  </h3>
+
+  <article class="post-content">
+    <h1>Linux性能优化</h1>
+    <blockquote>
+<p>问题：这里的负载是对cpu的负载吗？   </p>
+</blockquote>
+<h3 id="什么是平均负载"><a href="#什么是平均负载" class="headerlink" title="什么是平均负载"></a>什么是平均负载</h3><p>简单来说：平均负载是指在单位时间内，系统处于<strong>可运行状态和不可中断状态</strong>的平均进程数，也就是<strong>平均活跃进程数</strong>，它和cpu的使用率并没有直接关系。   </p>
+<ul>
+<li>可运行状态的进程<br>是指正在使用cpu或者等待cpu的进程，也就是我们常用ps命令看到的，处于R（Running或Runnable）状态的进程</li>
+<li>不可中断状态的进程<br>正处于内核态关键流程中的进程，并且这些进程是不可打断的，最常见的是等待硬件设备的I/O响应，也就是我们在ps命令中看到的D状态（Uninterruptible Sleep,也称为Disk Sleep）的进程。<br>==比如：== 当一个进程向磁盘读写数据时，为了保证数据的一致性，在得到磁盘回复前，它是不能被其他进程或者中断打断的，这个时候的进程就处于不可中断状态。如果此时的进程被打断了，就容易出现磁盘数据与进程数据不一致的问题。==所以：不可中断状态实际上是系统对进程和硬件设备的一种保护机制。==<br>因此，你可以简单理解为，平均负载其实就是平均活跃进程数。最理想的，就是每个cpu上都刚好运行着一个进程，这样每个cpu都能得到充分利用。比如平均负载为2时，意味着什么呢？</li>
+<li>在只有2个cpu的系统上，意味着所有的cpu都刚好被完全占用</li>
+<li>在4个cpu的系统上，意味着cpu有50%的空闲</li>
+<li>在只有1个cpu的系统中，则意味着有一半的进程竞争不到cpu<h3 id="平均负载为多少时合理"><a href="#平均负载为多少时合理" class="headerlink" title="平均负载为多少时合理"></a>平均负载为多少时合理</h3>平均负载最理想的情况是等于cpu个数。所以在评判平均负载时，首先你要知道系统有几个cpu，可以通过top命令或者从文件 /proc/cpuinfo 中读取。   </li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"># 执行top命令后，摁数字1键</span><br><span class="line">top </span><br><span class="line">1</span><br></pre></td></tr></table></figure>
+<p><em>图片</em><br>从图片中可以看到是8个cpu。<br>也可以从文件 /proc/cpuinfo 中读取。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">grep &apos;model name&apos; /proc/cpuinfo|wc -l</span><br><span class="line">8</span><br></pre></td></tr></table></figure></p>
+<p>有了cpu个数，我们就可以判断出，当平均负载比cpu个数还大的时候，系统已经出现了过载。对于上面的三个数字来说，平均负载到底该参考哪一个呢？<br>实际上，都要看。三个不同时间间隔的平均值，其实给我们都提供了分析系统负载趋势的数据来源，让我们更全面、更立体地理解目前的负载情况。打个比方：就像初秋的北京的天气，如果只看中午的温度，你可能以为还在7月份的大夏天呢。但如果结合了早上、中午、晚上三个时间点的温度来看的话，基本可以定位了解这一天的天气状况。<br>同样的，前面说到的cpu的三个负载时间段也是这个道理。</p>
+<ul>
+<li>如果1分钟、5分钟、15分钟的三个值基本相同，或者相差不大，那就说明系统负载很平稳</li>
+<li>如果1分钟的值远小于15分钟的值，就说明系统最近1分钟的负载在减小，而过去的15分钟内却有很大的负载。</li>
+<li>如果1分钟的值远大于15分钟的值，就说明1分钟的负载在增加，这种增加可能是临时性的，也有可能还会持续增加下去，所以需要持续观察。一旦1分钟的平均负载接近或者超过了cpu个数，就意味着系统正在发生过载的问题，这时就得分析调查是哪里导致的问题并想办法优化了。   </li>
+</ul>
+<p>这里再举个例子，假设我们在一个单 CPU 系统上看到平均负载为 1.73，0.60，7.98，那么说明在过去1分钟内，系统有73%的超载，而在15分钟内，有698%的超载，从整体上来看，系统的负载在降低。<br>在实际生产环境中，平均负载多高时，需要重点关注呢？当平均负载高于70%的时候，就应该排查负载过高的问题了。一旦负载过高，就可能导致进程响应变慢，进而影响服务的正常功能。70%的这个数字并不是绝对的，最推荐的方法，还是把系统的平均负载监控起来，然后根据更多的历史数据，判断负载的变化趋势。当趋势有明显的升高趋势时，比如说负载翻倍了，就去做分析和调查。也就是相对负载情况。</p>
+<h3 id="平均负载和cpu使用率"><a href="#平均负载和cpu使用率" class="headerlink" title="平均负载和cpu使用率"></a>平均负载和cpu使用率</h3><blockquote>
+<p>是不是平均负载高了cpu使用率就高？</p>
+</blockquote>
+<p>答案是否定的。平均负载是指单位时间内，处于可运行和不可中断状态的进程数。所以，它不仅包括了正在使用cpu的进程，还包括==等待cpu和等待i/o的进程。==<br>而cpu的使用率，是单位时间内cpu繁忙情况的统计，跟平均负载并不一定完全对应。比如：</p>
+<ul>
+<li>cpu密集型进程，使用大量cpu会导致平均负载升高，此时这两者是一致的。</li>
+<li>i/o密集型进程，等待i/o也会导致平均负载升高，但cpu使用率不一定高。</li>
+<li>大量等待cpu的进程调度也会导致平均负载升高，此时的cpu使用率也会升高。<h3 id="平均负载案例分析"><a href="#平均负载案例分析" class="headerlink" title="平均负载案例分析"></a>平均负载案例分析</h3>下面以三个示例来看这三种情况，并用iostat、mpstat、pidstat等工具，找出平均负载升高的根源。</li>
+</ul>
+
+  </article>
+</div>
+
+
+    
+
+
+
+
+</div>
+
+<div class="footer-wrapper container">
+  <footer class="footer clearfix">
+    <div class="clearfix">
+    <a href="http://wanggaoliang.club" class="footer-logo">
+      <i class="fa fa-github"></i>
+    </a>
+    <ul class="footer-social-link">
+      <li>© 2018 tudou</li>
+      <li><a href="http://wanggaoliang.club">Home</a></li>
+      
+    </ul>
+    <div class="footer-theme-info">
+      Theme <a href="//github.com/sabrinaluo/hexo-theme-replica">Replica</a>
+      by <a href="//github.com/sabrinaluo">Hiitea</a> ❤ Powered by Hexo
+    </div>
+    </div>
+    
+  </footer>
+</div>
+
+
+
+
+<script src="/js/main.js"></script>
+
+</body>
+</html>
