@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="">
+
+
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+  <title>
+    技术杂谈
+  </title>
+  <meta name="description" content="Talk is cheap,Show me the code.">
+  
+  <meta name="keywords" content="
+  
+  ">
+  
+  <meta name="author" content="tudou">
+
+  <meta http-equiv="Cache-Control" content="no-transform">
+  <meta http-equiv="Cache-Control" content="no-siteapp">
+
+  <link rel="icon" type="image/x-icon" href="">
+  <link rel="stylesheet" href="/css/main.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+  
+
+  
+
+  <script src="//cdnjs.cloudflare.com/ajax/libs/vue/1.0.25-csp/vue.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.11.2/moment.min.js"></script>
+</head>
+
+<body id="replica-app">
+
+<nav class="navbar-wrapper">
+  <div class="navbar">
+    <div class="container clearfix">
+      <a href="/" class="navbar-logo"><i class="fa fa-github"></i></a>
+
+      <div class="navbar-search float-left desktop-only">
+        <div class="navbar-search-form">
+          <label for="gsc-i-id1">This website</label>
+          <div id="google-search">
+            <gcse:search></gcse:search>
+          </div>
+        </div>
+      </div>
+
+      <ul class="navbar-nav float-left">
+        
+        <li><a href="/archives">Archives</a></li>
+        
+        
+        <li><a href="/categories">Categories</a></li>
+        
+        
+        <li><a href="/tags">Tags</a></li>
+        
+        
+        <li class="desktop-only"><a href="/atom.xml" target="_blank">RSS</a></li>
+        
+      </ul>
+
+      <ul class="navbar-nav user-nav float-right desktop-only">
+        <li class="user-nav-notification">
+          <a><span class="user-nav-unread"></span><i class="fa fa-bell"></i></a>
+        </li>
+        <li>
+          <a><i class="fa fa-plus"></i> <i class="fa fa-caret-down"></i></a>
+        </li>
+        <li class="user-nav-logo">
+          <a><img src="https://octodex.github.com/images/baracktocat.jpg"> <i class="fa fa-caret-down"></i></a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<div class="main-container">
+  <header class="header-wrapper desktop-only">
+  <div class="container header-site-detail">
+    <ul class="header-toolbar">
+      <li class="clearfix">
+        <a href="/archives" class="header-toolbar-left"><i class="fa fa-file-text"></i> Posts </a>
+        <a href="/archives" class="header-toolbar-right"> 9 </a>
+      </li>
+      <li>
+        <a href="/tags" class="header-toolbar-left"><i class="fa fa-tags"></i> Tags </a>
+        <a href="/tags" class="header-toolbar-right"> 8 </a>
+      </li>
+      <li>
+        <a href="/categories" class="header-toolbar-left"><i class="fa fa-folder-open"></i> Categories </a>
+        <a href="/categories" class="header-toolbar-right"> 3 </a>
+      </li>
+    </ul>
+    <h2 class="header-title">
+      <i class="fa fa-book text-muted"></i>
+      <a href="/">技术杂谈</a>
+      
+      
+    </h2>
+  </div>
+
+  <div class="container">
+    <div class="header-tab-wrapper clearfix">
+      <span class="header-tab header-tab-selected"><i class="fa fa-thumbs-o-up"></i> Like</span>
+      <span class="header-tab"><i class="fa fa-share-alt"></i> Share</span>
+      <span class="header-tab"><i class="fa fa-comments-o"></i> Discussion</span>
+      <span class="header-tab"><i class="fa fa-bookmark-o"></i> Bookmark </span>
+      <span class="header-tab"><i class="fa fa-smile-o"></i> Smile <i class="fa fa-caret-down"></i></span>
+    </div>
+  </div>
+</header>
+
+
+<div class="post-container container">
+  <h3>
+    <i class="fa fa-user-o"></i>
+    tudou
+
+    <span class="post-date float-right" title="{{moment(1550488276000).format('MMM DD, YYYY, h:mm:ss A')}}">
+      <i class="fa fa-pencil-square-o"></i>
+      {{moment(1550488276000).fromNow()}}
+    </span>
+  </h3>
+
+  <article class="post-content">
+    <h1>Untitle</h1>
+    <p>垃圾收集的优缺点</p>
+<p>java是由虚拟机来自动管理内存的分配和回收，这点和c++不同。</p>
+<p><strong>优点</strong>：减少出错机会 ，更少出现内存泄漏和指针越界。</p>
+<p><strong>缺点：</strong>没有c++那么灵活和高效（这里导致不高效的说法有点牵强）</p>
+<p>gc收集的区域：堆、方法区</p>
+<h3 id="对象是否已可回收"><a href="#对象是否已可回收" class="headerlink" title="对象是否已可回收"></a>对象是否已可回收</h3><p>引用计数法和可达性分析</p>
+<p>引用计数法：对象被引用，则计数器加1。缺点：无法解决循环引用。优点：简单易理解</p>
+<p>可达性分析：对象到GC Root有无有效路径。如果没有则可回收，否则不可回收。<u>其中可作为GC Root的区域有</u>：</p>
+<ol>
+<li>虚拟机栈（栈帧中的本地变量表）中引用的对象</li>
+<li>方法区中类静态属性引用的对象</li>
+<li>方法区中常量引用的对象</li>
+<li>Native引用的对象</li>
+</ol>
+<p>java中的对象引用分类（jdk1.7+）</p>
+<ul>
+<li>强引用：普通的常见引用。A a = new A()这种</li>
+<li>软引用：soft reference 当jvm发生gc后仍然内存不足，则回收这部分引用对象</li>
+<li>弱引用：weak reference 不管内存是否充足，只要发生gc,则回收这部分对象</li>
+<li>虚引用（幻影引用）:无法通过虚引用取得一个对象实例。为一个对象设置虚引用关联的唯一目的就是能在这个对象被收集时收到一个系统通知。</li>
+</ul>
+<p>对象是否确实已经被回收了？</p>
+<h3 id="垃圾收集算法"><a href="#垃圾收集算法" class="headerlink" title="垃圾收集算法"></a>垃圾收集算法</h3><ul>
+<li>标记-清除算法</li>
+</ul>
+<p>分为两步：标记和清除。标记是标记可回收对象，清除是清除掉被回收的对象</p>
+<p>优点：简单</p>
+<p>缺点：1）速度慢 标记和清除两步都比较慢 2）容易产生内存碎片，导致大对象没有足够空间被分配</p>
+<ul>
+<li>复制算法</li>
+</ul>
+<p>把内存分为两块，每次只使用其中的一块。在gc发生时把存活对象复制到另一半（从头按顺序开始），然后清除掉剩下的未存活对象（TODO:有一部分知识点感觉落下了）</p>
+<p>优点：剩余空间紧凑</p>
+<p>缺点：每次只使用一半的内存，造成了浪费</p>
+<p>基于上述缺点，hot spot等虚拟机采用8:1:1的方式把内存分成三块（eden s1 s2）。每次使用eden和s1/s2两部分。当eden区中的存活对象大于s的大小时，需要进行老年代担保。也就是直接进入老年代。</p>
+<ul>
+<li>标记-整理算法</li>
+</ul>
+<p>基于标记-清除容易产生内存碎片的缺陷，标记-整理算法先标记可回收对象，回收以后剩余存活对象像堆内存的一方移动，这样就消除了内存碎片。</p>
+<p><strong>堆内存的分代收集</strong></p>
+<p>因为堆内对象存活时间的不同，jvm普遍采用分代收集思想。即分为新生代、老年代、永久代。新生代又分为eden区，s1区和s2区。复制算法适用于新生代gc收集，标记-清除和标记-整理适用于老年代的gc收集。</p>
+<!--**垃圾收集的时间点**（todo）-->
+<h3 id="垃圾收集器"><a href="#垃圾收集器" class="headerlink" title="垃圾收集器"></a>垃圾收集器</h3><p><img src="https://ws3.sinaimg.cn/large/006tKfTcly1g0cpqvpjllj30ig0b8mxy.jpg" alt=""></p>
+<p>垃圾收集器是垃圾收集算法的具体实现。分为新生代和老年代的垃圾收集器。<strong>值得注意的是：</strong>没有一个垃圾收集器是适合全部的，要不然也不会出现那么多的垃圾收集器。</p>
+<p>新生代：serial ，ParNew ，Parallel Scavenge，G1</p>
+<p>老年代：serial old ，cms，Parallel Old ,G1</p>
+<ul>
+<li>Serial</li>
+</ul>
+<p>基础新生代GC收集器。采用复制算法。串行，在垃圾收集时需要STW(stop the world)</p>
+<p>使用场景：桌面应用程序</p>
+<p>优点：在停顿用户可接受的情况下，在单核情况下更快</p>
+<p>缺点：STW，停顿时间长，不能很好的利用多核优势</p>
+<ul>
+<li>ParNew</li>
+</ul>
+<p>新生代GC收集器。serial的并行版本。</p>
+<ul>
+<li>Parallel Scavenge</li>
+</ul>
+<p>老年代GC收集器。主要关注点在于吞吐量。吞吐量：单位时间内程序运行时间所占总运行时间的比例。</p>
+<p>使用场景：在跟用户交互少的服务器上</p>
+<!--参数设置：TODO-->
+<ul>
+<li>serial old</li>
+</ul>
+<p>老年代GC收集器。serial old的老年代版本。</p>
+<p>搭配：serial,ParNeW </p>
+<ul>
+<li>Parallel old</li>
+</ul>
+<p>老年代GC收集器。serial old的并行版本</p>
+<ul>
+<li>cms</li>
+</ul>
+<p>老年代GC收集器。并发标记清除（concurrent-mark-sweep）。主要关注点在于减少gc停顿时间。</p>
+<p>使用场景：适用于跟用户强交互的应用</p>
+<p>cms相对复杂一些，主要分为</p>
+<ol>
+<li>初始标记（init mark）</li>
+<li>并发标记（concurrent mark）</li>
+<li>重新标记（remark）</li>
+<li>并发清除（concurrent sweep）</li>
+</ol>
+<p>四部分。其中，初始标记和重新标记仍然需要STW。四步中比较耗时的阶段是并发标记和并发清除，因为是跟用户程序并发进行的，所以可以减少部分的响应时间。</p>
+<ol>
+<li>初始标记</li>
+</ol>
+<p>初始标记就是根据可达性分析，标记到GC root能直接关联到的对象，这一步比较快。</p>
+<ol start="2">
+<li>并发标记</li>
+</ol>
+<p>由前阶段标记过的绿色对象出发，所有可到达的对象都在本阶段中标记。GC Root tracing的过程。</p>
+<ol start="3">
+<li>重新标记</li>
+</ol>
+<p>为了修正并发标记期间因用户程序继续运作而导致标记产生变动的那一部分对象的标记记录，这个阶段的停顿时间一般会比初始标记阶段稍长一些，远比并发标记的时间短。</p>
+<p>STW,暂停所有用户线程，重新扫描堆中的对象，进行可达性分析，标记活着的对象。因为并发标记阶段是和用户线程并发执行的过程，所以该过程中有可能用户线程修改某些活跃对象的字段，指向了一个未标记过的对象。（如下图红色对象在开始时不可达，但在并行期间引用发生变化，变为对象可达，这个阶段需要重新标记出此类的对象，防止在下一阶段被清理掉，这个过程也是需要STW的。<strong>特别注意：这个阶段是以新生代中对象为根来判断对象是否存活的。</strong>）</p>
+<p>重新标记阶段通过扫描堆来判断对象是否存活。remark阶段必须扫描整个堆（新生代+老年代）来判断对象是否存活。</p>
+<ol start="4">
+<li>并发清除</li>
+</ol>
+<p>进行并发的垃圾清除。在清除的过程中应用程序也是在运行的，所以会存在浮动垃圾的出现。就是在并发清除过程中产生的可回收对象。浮动垃圾可能会导致CMS出现 concurrent mode failure进而导致一次Full GC的出现。</p>
+<p><strong>cms的几个缺陷</strong></p>
+<ol>
+<li>对CPU资源敏感</li>
+</ol>
+<p>并发程序对cpu资源都是敏感的。gc线程会占用一部分的cpu资源导致应用程序变慢，吞吐量下降。</p>
+<p>默认gc线程数=（cpu数+3）/4</p>
+<p>由此可见，当cpu=2时，gc线程会占用一半的cpu资源，影响很大。随着cpu数量的增多，影响逐渐在降低。</p>
+<ol start="2">
+<li>无法处理浮动垃圾，可能出现“Concurrent mode failure”失败而导致一次Full GC增加gc收集的停顿时间</li>
+</ol>
+<p>浮动垃圾是在并发清除阶段产生的可回收对象。这部分对象因为已经错过了标记阶段，需要在下一次垃圾回收时回收。如果浮动垃圾太多导致应用程序的可用内存空间不足，就会导致concurrent mode failure的出现。这时会启动备用方案：临时使用serial old收集器来进行垃圾收集，停顿时间会变的更长。参数CMSInitiatingOccupancyFraction用来控制当使用了多少内存时启动gc收集的阈值。JDK1.6默认为92%。即当老年代使用了92%时启动gc，具体可根据情况而定。</p>
+<ol start="3">
+<li>标记-清除算法导致的内存碎片的产生</li>
+</ol>
+<p>cms采用标记-清除算法，所以会在gc后会产生内存碎片。内存碎片会导致大对象因找不到足够的空间而提前触发Full GC，为此提供了UseCMSCompactAtFullCollection参数（默认开启）用于在CMS收集器在顶不住要进行Full GC时开启内存碎片的合并整理过程。</p>
+<ul>
+<li>G1</li>
+</ul>
+<h3 id="案例"><a href="#案例" class="headerlink" title="案例"></a>案例</h3><p><a href="https://tech.meituan.com/2017/12/29/jvm-optimize.html" target="_blank" rel="noopener">https://tech.meituan.com/2017/12/29/jvm-optimize.html</a></p>
+<p>各分区的大小对GC的性能影响很大。如果将各分区调整到合适的大小，分析<strong>活跃数据的大小</strong>是很好的切入点。</p>
+<p><strong>活跃数据的大小</strong>是指：应用程序稳定运行时长期存活对象在堆中占用的空间大小，也就是Full GC后老年代占用空间的大小。活跃数据和各分区之间的比例关系如下表所示：</p>
+<table>
+<thead>
+<tr>
+<th>空间</th>
+<th>倍数</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>总大小</td>
+<td><strong>3-4</strong> 倍活跃数据的大小</td>
+</tr>
+<tr>
+<td>新生代</td>
+<td><strong>1-1.5</strong> 活跃数据的大小</td>
+</tr>
+<tr>
+<td>老年代</td>
+<td><strong>2-3</strong> 倍活跃数据的大小</td>
+</tr>
+<tr>
+<td>永久代</td>
+<td><strong>1.2-1.5</strong> 倍Full GC后的永久代空间占用</td>
+</tr>
+</tbody>
+</table>
+<p>例如，根据GC日志获得老年代的活跃数据大小为300M，那么各分区大小可以设为：</p>
+<blockquote>
+<p>总堆：1200MB = 300MB <em> 4 新生代：450MB=300MB </em> 1.5 老年代：750MB=  1200MB - 450MB</p>
+</blockquote>
+<p>这部分设置仅仅是堆大小的初始值，后面的优化中，可能会调整这些值。</p>
+<h4 id="优化步骤"><a href="#优化步骤" class="headerlink" title="优化步骤"></a>优化步骤</h4><p>GC优化一般分为：确定目标、优化参数、验收结果</p>
+<h5 id="确定目标"><a href="#确定目标" class="headerlink" title="确定目标"></a>确定目标</h5><p>明确应用程序的系统需求是性能优化的基础，系统的需求是指应用运行时某方面的需求，譬如：-高可用，可用性达到几个9，-低延迟，请求必须在多少毫秒内完成相应 -高吞吐：每秒完成多少次事务。</p>
+
+  </article>
+</div>
+
+
+    
+
+
+
+
+</div>
+
+<div class="footer-wrapper container">
+  <footer class="footer clearfix">
+    <div class="clearfix">
+    <a href="http://wanggaoliang.club" class="footer-logo">
+      <i class="fa fa-github"></i>
+    </a>
+    <ul class="footer-social-link">
+      <li>© 2018 tudou</li>
+      <li><a href="http://wanggaoliang.club">Home</a></li>
+      
+    </ul>
+    <div class="footer-theme-info">
+      Theme <a href="//github.com/sabrinaluo/hexo-theme-replica">Replica</a>
+      by <a href="//github.com/sabrinaluo">Hiitea</a> ❤ Powered by Hexo
+    </div>
+    </div>
+    
+  </footer>
+</div>
+
+
+
+
+<script src="/js/main.js"></script>
+
+</body>
+</html>
